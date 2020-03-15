@@ -16,19 +16,10 @@ ID_MIN_PROBLEM = 0
 ID_MAX_PROBLEM = -1
 ID_POS = 0
 ID_FIT = 1
-omega = 1
+omega = 0.9
 
 def sigmoid1(gamma):
     #print(gamma)
-    if gamma < 0:
-        return 1 - 1/(1 + math.exp(gamma))
-    else:
-        return 1/(1 + math.exp(-gamma))
-
-
-def sigmoid2(gamma):
-    #print(gamma)
-    gamma = -gamma
     if gamma < 0:
         return 1 - 1/(1 + math.exp(gamma))
     else:
@@ -116,23 +107,6 @@ def test_accuracy(agent, trainX, testX, trainy, testy):
 def onecnt(agent):
     return sum(agent)
 
-# def OBL(sf_pop, trainX, testX, trainy, testy):
-#     sft_pop = deepcopy(sf_pop)
-#     sff_pop = deepcopy(sf_pop)
-    
-#     for i in range(len(sf_pop)):
-#         for j in range(len(sf_pop[0][0])):
-#             if sf_pop[i][0][j] == 1:
-#                 sft_pop[i][0][j] = 0
-#             else:
-#                 sft_pop[i][0][j] = 1
-                
-#     for i in range(len(sft_pop)):
-#         fit = fitness(sft_pop[i][0], trainX, testX, trainy, testy)
-#         if fit < sf_pop[i][1]:
-#             sft_pop[i] = (sft_pop[i][0], fit)
-            
-#     return sff_pop
         
 def randomwalk(agent):
     percent = 30
@@ -307,17 +281,6 @@ def sailFish(dataset):
             if s_current_best[ID_FIT] < s_gbest[ID_FIT]:
                 s_gbest = np.array(deepcopy(s_current_best))
             
-#         print(sf_gbest)   
-        # agent = sf_gbest[ID_POS]
-        # fitTemp = sf_gbest[ID_FIT]
-        # for i in range(len(agent)):
-        #     temp1 = agent[i]
-        #     if sigmoid(temp1)<0.5:
-        #         agent[i] = 0
-        #     else:
-        #         agent[i] = 1
-        # new_tuple = ( agent,fitTemp )
-        
         
         testAcc = test_accuracy(sf_gbest[ID_POS], trainX, testX, trainy, testy)
         featCnt = onecnt(sf_gbest[ID_POS])
@@ -336,7 +299,7 @@ for datasetname  in datasetlist:
     accuArr = []
     featArr = []
     start_time = datetime.now()
-    for i in range(15):
+    for i in range(20):
         # print(i)
         agentBest, testAcc, featCnt = sailFish("csvUCI/"+datasetname)
         # print(testAcc)
