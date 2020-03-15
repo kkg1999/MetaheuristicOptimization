@@ -52,9 +52,6 @@ def initialise(partCount, dim, trainX, testX, trainy, testy):
     
     list_of_tuples = list(zip(population, fit))
         
-    #for i in range(partCount):
-#         print(list_of_tuples[i])
-        
     return list_of_tuples
     
 def _get_global_best__( pop, id_fitness, id_best):
@@ -92,12 +89,7 @@ def test_accuracy(agent, trainX, testX, trainy, testy):
     val=1
     if np.shape(cols)[0]==0:
         return val    
-    # clf = RandomForestClassifier(n_estimators=300)
     clf=KNeighborsClassifier(n_neighbors=5)
-    # clf=MLPClassifier( alpha=0.01, max_iterno=1000) #hidden_layer_sizes=(1000,500,100)
-    #cross=4
-    #test_size=(1/cross)
-    #X_train, X_test, y_train, y_test = train_test_split(trainX, trainy,  stratify=trainy,test_size=test_size)
     train_data=trainX[:,cols]
     test_data=testX[:,cols]
     clf.fit(train_data,trainy)
