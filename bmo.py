@@ -65,6 +65,7 @@ def fitness(agentCurr,inputAgent,inputImage,iterNo):
 	#Well, How about calling the in built entropy function?
 	#Yep'
 	# will try that one if this disappoints me
+	
 	# print('sum = ',sum,end=' ')
 	# print('log(sum) = ',math.log(sum))
 	# tmp=deepcopy(img2)
